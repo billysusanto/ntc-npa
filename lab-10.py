@@ -6,10 +6,7 @@
 # cat vlan_ids.conf
 #output: will print what inside the file
 
-#Step 1-3
-
-
-#Step 1-4
+#Step 1-3,4
 #Open the file
 vlan_file = open('vlan_ids.conf', 'r')
 
