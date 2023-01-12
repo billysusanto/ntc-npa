@@ -44,5 +44,5 @@
 
     - name: SAVE OUTPUTS TO INDIVIDUAL FILES
       ansible.builtin.template:
-        src: basic-copy-single.j2
+        src: report.j2
         dest: ./ping-responses/ping_responses_from_{{ inventory_hostname }}.txt
