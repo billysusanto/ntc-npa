@@ -1,0 +1,9 @@
+[ios]
+csr1 ansible_network_os=ios ansible_user=ntc ansible_ssh_pass=ntc123
+csr2 ansible_network_os=ios ansible_user=ntc ansible_ssh_pass=ntc123
+csr3 ansible_network_os=ios ansible_user=ntc ansible_ssh_pass=ntc123
+
+[vmx]
+vmx1 ansible_network_os=junos ansible_user=ntc ansible_ssh_pass=ntc123
+vmx2 ansible_network_os=junos ansible_user=ntc ansible_ssh_pass=ntc123
+vmx3 ansible_network_os=junos ansible_user=ntc ansible_ssh_pass=ntc123
