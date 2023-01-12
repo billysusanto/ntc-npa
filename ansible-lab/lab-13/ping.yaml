@@ -1,0 +1,48 @@
+---
+
+- name: TEST REACHABILITY - SOLUTION 1
+  hosts: ios
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+
+  vars:
+    target_ips:
+      - "10.0.0.15"
+      - "10.0.0.2"
+      - "198.6.1.4"
+
+  tasks:
+    - name: CREATE DIRECTORIES BASED ON OS
+      ansible.builtin.file:
+        path: ./ping-responses/
+        state: directory
+
+    - name: CREATE SNMP.CONF FILE
+      ansible.builtin.file:
+        path: ./ping-responses/ping_result_from_{{ ansible_host }}.txt
+        state: touch
+
+    - name: ENSURE DIRECTORY FOR EACH DEVICE EXISTS
+      ansible.builtin.file:
+        path: ./ping-responses/
+        state: directory
+
+    - name: SEND PING COMMANDS TO DEVICES
+      cisco.ios.ios_command:
+        commands: "ping {{ item }} repeat 2"
+      register: ping_responses
+      loop: "{{ target_ips }}"
+
+    - name: VERIFY REGISTERED VARIABLE
+      ansible.builtin.debug:
+        var: ping_responses
+
+    - name: TEST LOOPING OVER REGISTERED VARIABLE
+      ansible.builtin.debug:
+        var: "{{ item }}"
+      loop: "{{ ping_responses.results }}"
+
+    - name: SAVE OUTPUTS TO INDIVIDUAL FILES
+      ansible.builtin.template:
+        src: basic-copy-single.j2
+        dest: ./ping-responses/ping_responses_from_{{ inventory_hostname }}.txt
