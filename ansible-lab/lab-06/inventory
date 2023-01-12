@@ -1,0 +1,8 @@
+[ios]
+csr1    ntc_device_type=csr1000v-ng
+csr2    ansible_host=10.1.1.1
+csr3
+
+[nxos_spines]
+nxos-spine1  ntc_device_type=n9k
+nxos-spine2
